@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.geekwise.geekwiserestaurantapplication.*;
 
+
 @Repository
 @Transactional
 public class UserDao {
@@ -21,7 +22,7 @@ public class UserDao {
 	public List<User> findAll() {
 		return em.createQuery("FROM User", User.class).getResultList();
 
-	}
+	}	
 	
 	public User findByEmail(String email) {
 		try {

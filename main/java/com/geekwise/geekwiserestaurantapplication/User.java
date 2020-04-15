@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +31,9 @@ public class User {
 		this.password = password;
 	}
 
+	@OneToMany(mappedBy = "user")
+	private Set<Food> food;
+	
 	public long getId() {
 		return id;
 	}
