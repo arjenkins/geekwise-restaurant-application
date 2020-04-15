@@ -1,0 +1,11 @@
+.div1{
+		background-color: #f5f2f2;
+}
+
+.center h1{
+	font-family: 'Source Sans Pro', sans-serif;
+	text-decoration-line: underline;
+	text-decoration-color: #a33e3e;
+	tect-decoration-style: solid;
+	text-decoration-thickness: 5px;
+}
