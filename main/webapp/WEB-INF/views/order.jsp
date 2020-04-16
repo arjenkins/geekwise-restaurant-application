@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -30,6 +31,10 @@
     <ul class="nav navbar-nav">
       <li><a href="/">Home</a></li>
       <li><a href="/login">Login</a></li>
+      <li><a href="/order">Order Form</a></li>
+      <li><a href="/vieworders">View Orders</a></li>
+      <li><a href="/logout">Logout</a></li>
+      
     </ul>
   </div>
 	<div class=div1>
@@ -39,22 +44,27 @@
 	 <br>
 	 <br>
 	  <div class=center>
-	    <h1 align="center">Login Screen</h1>
-	    	
-	    	<form action="/login" method="post">
-			<div class="col-lg-4 col-md-4 col-sm-4 container justify-content-center">
-  				<div class="col">
-  				<div class="centered">
-					<input type="email" class="form-control" placeholder="Email"
-						name="email" required />
-						<br>
-						 <input type="text"class="form-control" placeholder="Password" name="password"
-						required />
-						<br>
-					<button type="submit" class="btn btn-primary mb-2">Login</button>	  
-					</div>
-					</div>
-	  </div>
+	    <h1 align="center">Bruce's Diner</h1>
+			<br>
+	    	<h3 align="center">I'd like to order</h3>
+	    	</div>
+	    	<div class="centered">
+	    		<form action="/submit" method="post">
+	    		<select name = "menu">
+	    		<option value = "blt sandwich">BLT Sandwich</option>
+	    		<option value = "pepperoni pizza slice">Pepperoni Pizza Slice</option>
+	    		<option value = "chicken alfredo">Chicken Alfredo</option>
+	    		<option value = "ramen noodle bowl">Ramen Noodle Bowl</option>
+	 			</select>
+	 			<select name="quantity">
+   				<option value='1'>1</option>
+  				<option value='2'>2</option>
+   				<option value='3'>3</option>
+  				<option value='4'>4</option>
+				</select>
+	    		<a class="btn btn-primary" href="/vieworders" role="button" "onclick="alert"(Success!)">Order It</a>
+	 			</form>
+	  		</div>
 	  <br>
 	  <br>
 	  <br>

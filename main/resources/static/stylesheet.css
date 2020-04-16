@@ -9,3 +9,11 @@
 	tect-decoration-style: solid;
 	text-decoration-thickness: 5px;
 }
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+

@@ -1,5 +1,7 @@
 package com.geekwise.geekwiserestaurantapplication;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.geekwise.geekwiserestaurantapplication.dao.FoodDao;
 import com.geekwise.geekwiserestaurantapplication.dao.UserDao;
 
 
@@ -20,6 +23,8 @@ public class GeekwiseController {
 @Autowired
 UserDao userDao;
 	
+@Autowired
+FoodDao foodDao;
 
 @RequestMapping("/")
 public ModelAndView landing() {
@@ -54,9 +59,25 @@ public ModelAndView logout(HttpSession session, RedirectAttributes redir) {
 
 @RequestMapping("/order")
 public ModelAndView showOrder(@SessionAttribute("user") User user) {
-	//List<Order> order = orderDao.findByUser(user);
 	ModelAndView mav = new ModelAndView("order");
 	return mav;
+}
+
+@PostMapping("/order")
+public ModelAndView submitOrder(@SessionAttribute("user") User user, @RequestParam("menu") String menu, @RequestParam("quantity") int quantity) {
+	Food food = new Food();
+	food.setMenu(menu);
+	food.setQuantity(quantity);
+	food.setUser(user);
+	foodDao.createFood(food);
+	return new ModelAndView("vieworders");
+}
+
+@RequestMapping("/vieworders")
+public ModelAndView viewOrders(@SessionAttribute("user") User user) {
+	List<Food> food = foodDao.findByUser(user);
+	return new ModelAndView("vieworders", "food", food);
+
 }
 
 }
