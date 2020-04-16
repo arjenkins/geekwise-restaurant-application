@@ -49,6 +49,7 @@
 	    	<h3 align="center">I'd like to order</h3>
 	    	</div>
 	    	<div align="center">
+	    	<div class="centered">
 	    		<form action="/submit" method="post">
 	    		<select name = "menu">
 	    		<option value = "blt sandwich">BLT Sandwich</option>

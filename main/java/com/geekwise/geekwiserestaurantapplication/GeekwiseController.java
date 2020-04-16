@@ -1,6 +1,7 @@
 package com.geekwise.geekwiserestaurantapplication;
 
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.geekwise.geekwiserestaurantapplication.dao.UserDao;
+
+
 import com.geekwise.geekwiserestaurantapplication.dao.FoodDao;
+import com.geekwise.geekwiserestaurantapplication.dao.UserDao;
 
 
 @Controller
@@ -55,31 +58,27 @@ public ModelAndView logout(HttpSession session, RedirectAttributes redir) {
 }
 
 @RequestMapping("/order")
-public ModelAndView order() {
+public ModelAndView showOrder(@SessionAttribute("user") User user) {
 	ModelAndView mav = new ModelAndView("order");
 	return mav;
 }
 
 
 @PostMapping("/order")
-//public ModelAndView order(@SessionAttribute("user") User user, @RequestParam("menu") String menu, @RequestParam("quantity") int quantity) {
-	public ModelAndView order(@RequestParam("menu") String menu, @RequestParam("quantity") int quantity) {
-	
+public ModelAndView submitOrder(@SessionAttribute("user") User user, @RequestParam("menu") String menu, @RequestParam("quantity") int quantity) {
 	Food food = new Food();
 	food.setMenu(menu);
 	food.setQuantity(quantity);
-	//food.setUser(user);
-	foodDao.addFood(food);
-	return new ModelAndView("redirect:/vieworders");
+	food.setUser(user);
+	foodDao.createFood(food);
+	return new ModelAndView("vieworders");
 }
 
 @RequestMapping("/vieworders")
-public ModelAndView showOrder(User user) {
-	//List<Food> food = foodDao.findByUser(user);
-	List<Food> food = foodDao.findAll();
+public ModelAndView viewOrders(@SessionAttribute("user") User user) {
+	List<Food> food = foodDao.findByUser(user);
+	return new ModelAndView("vieworders", "food", food);
 
-	ModelAndView mav = new ModelAndView("vieworders");
-	mav.addObject("food", food);
-	return mav;
 }
+
 }
